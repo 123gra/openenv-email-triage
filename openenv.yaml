@@ -1,0 +1,19 @@
+name: email-triage-env
+version: 1.0
+
+environment:
+  observation_space:
+    text: string
+
+  action_space:
+    label: string
+
+tasks:
+  - name: email_classification
+    difficulty: easy
+
+  - name: task_extraction
+    difficulty: medium
+
+  - name: priority_decision
+    difficulty: hard
