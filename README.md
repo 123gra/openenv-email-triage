@@ -151,7 +151,7 @@ Final Score: 3.0
 
 ## Hugging-Face URL
 
-
+https://huggingface.co/spaces/Gracem98/email-triage-env
 
 ##  Run UI
 
@@ -285,9 +285,3 @@ Grace Magdalene
 
 ---
 
-##  Submission
-
-* GitHub Repo: *(Add link)*
-* Hugging Face Space: *(Add link)*
-
----
