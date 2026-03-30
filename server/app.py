@@ -13,7 +13,6 @@ def home():
     return FileResponse("index.html")
 
 
-
 @app.post("/reset")
 def reset():
     return {
@@ -31,7 +30,6 @@ def step(action: dict):
     }
 
 
-
 @app.post("/predict")
 def predict(data: Input):
     text = data.text.lower()
@@ -44,3 +42,14 @@ def predict(data: Input):
         label = "normal"
 
     return {"prediction": label}
+
+
+
+def main():
+    return app
+
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("server.app:app", host="0.0.0.0", port=7860)
