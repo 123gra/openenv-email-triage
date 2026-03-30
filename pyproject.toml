@@ -1,0 +1,16 @@
+[project]
+name = "email-triage-env"
+version = "0.1.0"
+description = "OpenEnv Email Triage Environment"
+authors = [
+  { name = "Grace" }
+]
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "pydantic"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
