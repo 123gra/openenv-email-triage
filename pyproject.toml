@@ -8,11 +8,13 @@ authors = [
 dependencies = [
   "fastapi",
   "uvicorn",
-  "pydantic"
+  "pydantic",
+  "openenv>=0.1.13"
 ]
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
 [project.scripts]
 server = "server.app:app"

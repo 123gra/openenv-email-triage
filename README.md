@@ -48,6 +48,7 @@ This project simulates that workflow as an **AI learning environment**, enabling
 ├── Dockerfile
 ├── requirements.txt
 ├── README.md
+|--pyproject.yaml
 ```
 
 ---
@@ -158,7 +159,7 @@ https://huggingface.co/spaces/Gracem98/email-triage-env
 ### Start server
 
 ```bash
-uvicorn app:app --host 0.0.0.0 --port 8000
+uvicorn server.app:app --host 0.0.0.0 --port 8000
 ```
 
 ### Open in browser
