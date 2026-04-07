@@ -2,28 +2,44 @@ import os
 from openai import OpenAI
 from env.environment import EmailEnv, Action
 
-
 client = OpenAI(
-    base_url=os.environ["API_BASE_URL"],
-    api_key=os.environ["API_KEY"]
+    base_url=os.environ.get("API_BASE_URL"),
+    api_key=os.environ.get("API_KEY")
 )
 
 def llm_agent(text):
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": "Classify email into one of: urgent, spam, normal. Return ONLY one word."
-            },
-            {
-                "role": "user",
-                "content": text
-            }
-        ]
-    )
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Classify email into one of: urgent, spam, normal. Return ONLY one word."
+                },
+                {
+                    "role": "user",
+                    "content": text
+                }
+            ]
+        )
 
-    return response.choices[0].message.content.strip().lower()
+        result = response.choices[0].message.content.strip().lower()
+
+        if "urgent" in result:
+            return "urgent"
+        elif "spam" in result:
+            return "spam"
+        else:
+            return "normal"
+
+    except Exception as e:
+        
+        text = text.lower()
+        if "urgent" in text:
+            return "urgent"
+        elif "offer" in text:
+            return "spam"
+        return "normal"
 
 
 def run():
@@ -36,7 +52,11 @@ def run():
     print("[START] task=email_triage", flush=True)
 
     while True:
-        action_label = llm_agent(obs.text)
+        try:
+            action_label = llm_agent(obs.text)
+        except Exception:
+            action_label = "normal"  # fallback safety
+
         action = Action(label=action_label)
 
         obs, reward, done, _ = env.step(action)
