@@ -13,6 +13,10 @@ def run():
     obs = env.reset()
 
     total = 0
+    step_count = 0
+
+    
+    print("[START] task=email_triage", flush=True)
 
     while True:
         action_label = simple_agent(obs.text)
@@ -20,13 +24,17 @@ def run():
 
         obs, reward, done, _ = env.step(action)
         total += reward
+        step_count += 1
 
-        print(f"{action_label} -> {reward}")
+        
+        print(f"[STEP] step={step_count} reward={reward}", flush=True)
 
         if done:
             break
 
-    print("Final Score:", total)
+    
+    print(f"[END] task=email_triage score={total} steps={step_count}", flush=True)
+
 
 if __name__ == "__main__":
     run()
