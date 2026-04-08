@@ -28,13 +28,13 @@ class EmailEnv:
     def step(self, action: Action) -> Tuple[Observation, float, bool, Dict]:
         correct = self.data[self.index]["label"]
 
-        # 🎯 reward shaping
+        
         if action.label == correct:
-            reward = 1.0
+            reward = 0.8
         elif action.label in correct:
             reward = 0.5
         else:
-            reward = -1.0
+            reward = 0.2
 
         self.total_reward += reward
 
